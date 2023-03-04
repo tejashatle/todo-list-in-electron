@@ -1,0 +1,17 @@
+directories:
+  output: dist
+  buildResources: build
+appId: todo-app
+win:
+  target:
+    - nsis
+  icon: src/icon.ico
+  requestedExecutionLevel: requireAdministrator
+nsis:
+  installerIcon: src/icon.ico
+  uninstallerIcon: src/icon.ico
+  uninstallDisplayName: CPU Monitor
+  license: license.txt
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+electronVersion: 11.1.1

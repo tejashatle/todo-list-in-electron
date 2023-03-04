@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <div class="todo-form">
+        <form>
+            <div class="entry">
+                <label>Enter a todo: </label><br>
+                <input type="text" id="todo" autofocus>
+            </div>
+            <button class="addtodo" type="submit">Add ToDo</button>
+        </form>
+    </div>
+    
+
+        <div id="todolist">
+            <div class="todohead">
+                <div class="status">
+                    Status
+                </div>
+                <div class="tasks">
+                    Tasks
+                </div>
+                <!-- <div class="action">
+                    Action
+                </div> -->
+            </div>
+           
+        </div>
+    <script>
+
+        const rowNumber = 3;
+        const count = document.querySelector('#todolist').childElementCount;
+
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(e)
+        {
+            e.preventDefault();
+            const todo = document.querySelector('#todo').value;
+            // console.log(todo);
+
+            const todolist = document.querySelector('#todolist');
+            // console.log("child ele"+count);
+            const row = document.createElement('div');
+            row.className = 'row';
+
+            
+            const count = document.querySelector('#todolist').childElementCount;
+            todolist.appendChild(row);
+            const chbox = document.createElement('div');
+            chbox.id = "chbox"+count;
+            const tasks = document.createElement('div');
+            tasks.id = "tasks"+count;
+            const action = document.createElement('div');
+            action.id = "action"+count;
+
+            row.appendChild(chbox);
+            row.appendChild(tasks);
+            // row.appendChild(action);                         to not inculde delete button
+
+            var check = document.createElement("INPUT");
+            check.setAttribute("type","checkbox");
+            const checkbox = document.querySelector('#chbox'+count);
+            checkbox.appendChild(check);
+            // const ul = document.querySelector('ul');
+            // const li = document.createElement('li');
+            const task = document.querySelector('#tasks'+count);
+            // // console.log(task);
+            // const tasktodo = document.createElement('span');
+
+            // // const todotext = document.createTextNode(todo);
+            const todotext = document.createTextNode(todo);
+            // // li.appendChild(todotext);
+            // // ul.appendChild(li);
+
+            task.appendChild(todotext);
+
+            
+            document.querySelector('#todo').value = '';
+
+            var del = document.createElement("INPUT");
+            del.setAttribute("type","submit");
+            del.setAttribute("value","Delete");
+            del.className = "delete";
+            const dele = document.querySelector('#action'+count);
+            // dele.appendChild(del);                       to not include delete button
+            // ipcRenderer.send('todo:add',todo);
+
+            
+            const rowCol = todolist.childNodes;
+            
+            // console.log(rowCol[3].childNodes[2]);
+            // rowCol.addEventListener("mouseover", deleteElement);
+
+            // del property 
+
+            // for (let index = rowNumber; index < count+3; index++) {
+            //     // console.log(rowCol[index].childNodes[2].id);
+                
+            //     rowCol[index].childNodes[2].addEventListener("click", deleteElement);
+            // }
+        }
+
+        
+        // const deleteButton = document.querySelector('#todolist');
+        // deleteButton.className = "delete";
+        // console.log((deleteButton.childNodes).childNodes);
+        // const rowCol = deleteButton.childNodes;
+        // console.log(rowCol[3]);
+        // rowCol[3].addEventListener("mouseover", deleteElement);
+        // console.log(rowCol[3].childNodes[2].childNodes[0].className);
+        
+        // const deleteButton = document.querySelector('#todolist');
+        // // deleteButton.className = "delete";
+        // console.log(deleteButton.childNodes);
+        
+        // deleteButton.addEventListener("click", deleteElement);
+        
+
+        function deleteElement(e)
+        {
+            // e.target.remove();
+            
+            const ct = document.querySelector('#todolist').childElementCount;
+            const todolist = document.querySelector('#todolist');
+            const rowCol = todolist.childNodes;
+            
+            
+            for (let index = rowNumber; index < count+3; index++) {
+                
+                for(let index2 = ct; index2 < ct+3; index2++)
+                {
+                    // console.log("first"+rowCol[index2].childNodes[2].id);
+                    // console.log("seconds"+e.path[1].id);
+                    if(e.path[1].id == rowCol[index2].childNodes[2].id)
+                    {
+                        // console.log(rowCol[index].remove);
+                        rowCol[index2].remove();
+                    }
+                }
+
+                if(e.path[1].id == rowCol[index].childNodes[2].id)
+                    {
+                        // console.log(rowCol[index].remove);
+                        rowCol[index].remove();
+                    }
+
+            }
+            // const todolist = document.querySelector('#todolist');
+            // todolist.removeChild();
+
+        }
+
+        // const ul = document.querySelector('ul');
+
+        // ipcRenderer.on('item:add', function(e, todo){
+        //     const li = document.createElement('li');
+        //     const todotext = document.createTextNode(todo);
+        //     li.appendChild(todotext);
+        //     ul.appendChild(li);
+        // });
+
+        
+            //catch clear items
+        ipcRenderer.on('todo:clear', function(){
+           
+            const todo = document.querySelector('#todolist');
+            while (todo.hasChildNodes())
+            {
+                todo.removeChild(todo.childNodes[2]);
+            }
+        });
+    </script>
+</body>
+</html>

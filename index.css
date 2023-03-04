@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+body,html
+{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    background-color: #EA4A4A;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+}
+
+form{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    height: 100px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    /* align-content: center; */
+}
+
+.todo-form
+{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+#todo
+{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 250px;
+    height: 20px;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.todo-form .addtodo
+{
+    height: 25px;
+    padding-top: 2px;
+    width: 100px;
+    border-radius: 50px;
+    border: 2px solid #EA4A4A;
+    background-color:rgb(255, 255, 255);
+    color: #EA4A4A;
+}
+
+.todo-form .addtodo:hover
+{
+    
+    background-color: #EA4A4A;
+    color: rgb(255, 255, 255);
+}
+
+#todolist
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    margin: 50px 350px;
+}
+
+#todolist .todohead
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 8px;
+    font-weight: 900;
+}
+
+#todolist .row
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 8px;
+    font-weight: 900;
+}
+
+#todolist .row .delete
+{
+    height: 25px;
+    padding-top: 2px;
+    width: 100px;
+    border-radius: 50px;
+    border: 2px solid #EA4A4A;
+    background-color: #EA4A4A;
+    color: rgb(255, 255, 255);
+}
+
+#todolist .row .delete:hover
+{
+    
+    background-color:rgb(255, 255, 255);
+    color: #EA4A4A;
+}
